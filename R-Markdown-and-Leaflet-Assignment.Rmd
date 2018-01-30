@@ -1,0 +1,56 @@
+---
+title: "R Markdown and Leaflet Assignment"
+author: "Hemanshu Singh"
+date: "January 30, 2018"
+output:
+  beamer_presentation: default
+  slidy_presentation: default
+  ioslides_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(leaflet)
+ciscoIcon <- makeIcon(
+iconUrl = "http://www.cisco.com/web/fw/i/logo-open-graph.gif", 
+iconWidth = 31*215/230, iconHeight = 31,
+iconAnchorX = 31*215/230/2, iconAnchorY = 16
+)
+```
+
+## Slide with Bullets
+```{r}
+ciscoLatLong <- data.frame(
+lat = c(37.412577, 37.410776, 37.430788),
+lng = c(-121.917040, -121.924144, -121.924145))
+ciscoSites <- c(
+"<a href='http://www.cisco.com</a>"
+)
+
+ciscoLatLong %>%
+leaflet() %>%
+addTiles() %>%
+addMarkers(icon = ciscoIcon)
+```
+
+## Slide with R Output
+```{r}
+ciscoSites <- c(
+"<a href='http://www.cisco.com</a>"
+)
+
+ciscoLatLong %>%
+leaflet() %>%
+addTiles() %>%
+addMarkers(icon = ciscoIcon, popup = ciscoSites)
+```
+
+## Slide with Plot
+```{r}
+leaflet() %>%
+addTiles() %>%
+addRectangles(lat1 = 37.412577, lng1 = -121.917040,
+lat2 = 37.430788, lng2 = -121.924145)
